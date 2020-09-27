@@ -1,0 +1,36 @@
+name: AWS CDK Synth
+
+on: [push]
+
+jobs:
+  aws-cdk:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: CDK Synth
+      uses: scottbrenner/aws-cdk-action@master
+      with:
+        args: synth
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+    - name: CDK Diff
+      uses: scottbrenner/aws-cdk-action@master
+      with:
+        args: diff
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+    - name: CDK Deploy
+      uses: scottbrenner/aws-cdk-action@master
+      with:
+        args: deploy
+      env:
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

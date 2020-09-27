@@ -1,4 +1,3 @@
-# -------------------------------------------------------------------
 # Minimal dockerfile from alpine base
 #
 # Instructions:
